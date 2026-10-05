@@ -303,34 +303,6 @@ function Page() {
       <InTheBoxSection />
       <FaqSection />
       <CtaFinal />
-      <div className="h-20 lg:hidden" aria-hidden />
-
-      {/* Barra de compra fixa no celular */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--border)] bg-white/95 px-4 py-3 backdrop-blur-md lg:hidden">
-        <div className="flex items-center gap-3">
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-[12.5px] text-[var(--ink)]/60">{bundle.name}</p>
-            <p className="font-display text-xl font-extrabold leading-tight text-[var(--navy)]">
-              {brl(bundle.price)}
-            </p>
-          </div>
-          <Link
-            to="/checkout"
-            search={{ plano: Number(bundle.id) }}
-            onClick={() =>
-              trackCheckoutClick({
-                source: "product_sticky_bar",
-                bundleId: bundle.id,
-                bundleName: bundle.name,
-                value: bundle.price,
-              })
-            }
-            className="inline-flex items-center gap-2 rounded-full bg-[var(--primary)] px-6 py-3.5 text-[15px] font-semibold text-white"
-          >
-            Comprar <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </div>
     </SiteLayout>
   );
 }

@@ -51,12 +51,6 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            to="/produto"
-            className="rounded-full bg-[var(--primary)] px-5 py-2.5 text-[13.5px] font-semibold text-white shadow-[0_6px_18px_-6px_rgba(91,74,230,0.7)] transition hover:bg-[var(--primary-dark)]"
-          >
-            Comprar
-          </Link>
           <button
             type="button"
             className="grid h-10 w-10 place-items-center rounded-full text-[var(--ink)] hover:bg-[var(--lilac)] lg:hidden"
