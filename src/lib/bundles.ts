@@ -4,7 +4,7 @@ import { brand } from "@/lib/brand";
 export type BundleId = "1" | "2" | "3";
 
 /** Valor mínimo (produtos, sem frete) para liberar o frete grátis. */
-export const FREE_SHIPPING_MIN = 150;
+export const FREE_SHIPPING_MIN = 199;
 export const FREE_SHIPPING_LABEL = `Frete grátis em compras acima de R$ ${FREE_SHIPPING_MIN}`;
 
 export const isFreeShippingEligible = (subtotal: number) => subtotal >= FREE_SHIPPING_MIN;
@@ -31,21 +31,21 @@ export type Bundle = {
 
 const brlInline = (n: number) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-// TODO(loja): preços provisórios — confirmar valores finais.
-const LIST_PRICE = 149.9;
+/** Preço de 1 unidade: referência do "de" dos kits (quantidade × preço unitário). */
+const UNIT_PRICE = 150;
 const kit = (
   units: number,
   price: number,
   extra: Partial<Pick<Bundle, "featured" | "badge">> = {},
 ): Bundle => {
-  const compareAt = +(LIST_PRICE * units).toFixed(2);
+  const compareAt = units > 1 ? +(UNIT_PRICE * units).toFixed(2) : undefined;
   const id = String(units) as BundleId;
   return {
     id,
     name: units === 1 ? "1 VIVI Cap" : `Kit com ${units} VIVI Cap`,
     units,
     price,
-    compareAtPrice: compareAt,
+    ...(compareAt ? { compareAtPrice: compareAt } : {}),
     perUnitLabel: `${brlInline(price / units)} por unidade`,
     description:
       units === 1
@@ -53,15 +53,15 @@ const kit = (
         : `${units} protetores térmicos completos — um para cada caneta ou para casa e trabalho`,
     checkoutProductName: `${brand.productName} — ${units} ${units === 1 ? "unidade" : "unidades"}`,
     checkoutUrl: `/checkout?plano=${id}`,
-    savings: `Economize ${brlInline(compareAt - price)}`,
+    ...(compareAt ? { savings: `Economize ${brlInline(compareAt - price)}` } : {}),
     ...extra,
   };
 };
 
 export const bundles: Bundle[] = [
-  kit(1, 97),
-  kit(2, 167, { featured: true, badge: "Mais vendido" }),
-  kit(3, 227, { badge: "Melhor custo-benefício" }),
+  kit(1, UNIT_PRICE),
+  kit(2, 200, { featured: true, badge: "Mais vendido" }),
+  kit(3, 230, { badge: "Melhor custo-benefício" }),
 ];
 
 /** Kits visíveis na loja. */

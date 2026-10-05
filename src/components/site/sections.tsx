@@ -251,6 +251,55 @@ export function ProblemSection() {
   );
 }
 
+/** Vídeo do produto + passo a passo de uso (página do produto). */
+export function HowToUseVideo() {
+  return (
+    <section id="como-usar" className="scroll-mt-28 bg-white py-20 md:py-28">
+      <div className="container-edge grid items-center gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="mx-auto w-full max-w-[380px] overflow-hidden rounded-[2rem] bg-[var(--navy)] shadow-[0_30px_70px_-40px_rgba(27,34,102,0.6)]">
+          {/* Com áudio: o cliente aperta o play (navegadores não deixam tocar som sozinho). */}
+          <video
+            className="aspect-[9/16] w-full object-cover"
+            poster="/videos/como-usar-poster.webp"
+            controls
+            playsInline
+            preload="none"
+            aria-label="Vídeo: tire suas dúvidas sobre o VIVI Cap e veja como usar"
+          >
+            <source src="/videos/como-usar.webm" type="video/webm" />
+            <source src="/videos/como-usar.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div>
+          <SectionHeading
+            eyebrow="Como usar"
+            title="Tire suas dúvidas em 1 minuto"
+            sub="Funciona com qualquer caneta? Precisa de bateria ou de geladeira? Precisa ligar? Aperte o play e veja as respostas — e como usar no dia a dia."
+          />
+          <ol className="mt-10 space-y-4">
+            {STEPS.map((st) => (
+              <li
+                key={st.n}
+                className="flex gap-4 rounded-[1.5rem] border border-[var(--border)] p-5"
+              >
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[var(--navy)] font-display text-[15px] font-extrabold text-white">
+                  {st.n}
+                </span>
+                <span>
+                  <b className="block text-[16px] text-[var(--navy)]">{st.title}</b>
+                  <span className="mt-1 block text-[14.5px] leading-relaxed text-[var(--ink)]/65">
+                    {st.text}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function HowItWorks() {
   return (
     <section id="como-funciona" className="scroll-mt-28 bg-[var(--paper)] py-20 md:py-28">
@@ -480,7 +529,9 @@ export function KitCard({ bundle }: { bundle: Bundle }) {
           {brl(bundle.price)}
         </span>
       </div>
-      <p className="mt-1 text-[13px] font-semibold text-emerald-700">{bundle.savings} · no Pix</p>
+      <p className="mt-1 text-[13px] font-semibold text-emerald-700">
+        {bundle.savings ? `${bundle.savings} · no Pix` : "Pagamento único no Pix"}
+      </p>
       <ul className="mt-5 space-y-2 text-[13.5px] text-[var(--ink)]/70">
         <li className="flex gap-2">
           <Check className="h-4 w-4 shrink-0 text-[var(--violet)]" />

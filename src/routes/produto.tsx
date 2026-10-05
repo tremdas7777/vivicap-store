@@ -8,7 +8,7 @@ import {
   ComparisonSection,
   CtaFinal,
   FaqSection,
-  HowItWorks,
+  HowToUseVideo,
   InTheBoxSection,
   TechSection,
 } from "@/components/site/sections";
@@ -318,7 +318,7 @@ function Page() {
         </div>
       </section>
 
-      <HowItWorks />
+      <HowToUseVideo />
       <TechSection />
       <BenefitsSection />
       <ComparisonSection />
