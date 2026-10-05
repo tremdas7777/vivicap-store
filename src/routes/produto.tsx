@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, Check, ChevronDown, Lock, RotateCcw, Truck } from "lucide-react";
+import { ArrowRight, Check, ChevronDown, Lock, Play, RotateCcw, Truck } from "lucide-react";
 import { useEffect, useState } from "react";
 import { BundleSelector } from "@/components/site/BundleSelector";
 import { SiteLayout } from "@/components/site/Layout";
@@ -157,32 +157,49 @@ function Page() {
             {/* Galeria */}
             <div className="lg:sticky lg:top-[calc(var(--site-chrome-h,6rem)+1rem)] lg:col-span-7">
               <div className="relative aspect-square overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_70px_-45px_rgba(27,34,102,0.5)]">
-                <img
-                  key={active.src}
-                  src={active.src}
-                  alt={active.alt}
-                  className={cn(
-                    "fade-up h-full w-full",
-                    active.full ? "object-cover" : "object-contain p-6 md:p-12",
-                  )}
-                  fetchPriority={activeImg === 0 ? "high" : "auto"}
-                />
+                {active.video ? (
+                  <video
+                    key={active.src}
+                    poster={active.src}
+                    className="fade-up h-full w-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label={active.alt}
+                  >
+                    <source src={active.video.webm} type="video/webm" />
+                    <source src={active.video.mp4} type="video/mp4" />
+                  </video>
+                ) : (
+                  <img
+                    key={active.src}
+                    src={active.src}
+                    alt={active.alt}
+                    className={cn(
+                      "fade-up h-full w-full",
+                      active.full ? "object-cover" : "object-contain p-6 md:p-12",
+                    )}
+                    fetchPriority={activeImg === 0 ? "high" : "auto"}
+                  />
+                )}
                 {!active.full && (
                   <span className="absolute bottom-4 left-4 rounded-full bg-[var(--navy)]/90 px-3 py-1.5 text-[12px] font-medium text-white">
                     {active.caption}
                   </span>
                 )}
               </div>
-              <div className="mt-3 grid grid-cols-5 gap-2 md:gap-3">
+              <div className="mt-3 grid grid-cols-6 gap-2 md:gap-3">
                 {productGallery.map((g, i) => (
                   <button
                     key={g.src}
                     type="button"
                     onClick={() => setActiveImg(i)}
-                    aria-label={`Ver foto: ${g.caption}`}
+                    aria-label={g.video ? "Ver vídeo" : `Ver foto: ${g.caption}`}
                     aria-current={i === activeImg}
                     className={cn(
-                      "aspect-square overflow-hidden rounded-xl border-2 bg-white transition md:rounded-2xl",
+                      "relative aspect-square overflow-hidden rounded-xl border-2 bg-white transition md:rounded-2xl",
                       !g.full && "p-1.5",
                       i === activeImg
                         ? "border-[var(--violet)]"
@@ -195,6 +212,11 @@ function Page() {
                       className={cn("h-full w-full", g.full ? "object-cover" : "object-contain")}
                       loading="lazy"
                     />
+                    {g.video && (
+                      <span className="absolute inset-0 grid place-items-center bg-black/25">
+                        <Play className="h-5 w-5 fill-white text-white" />
+                      </span>
+                    )}
                   </button>
                 ))}
               </div>

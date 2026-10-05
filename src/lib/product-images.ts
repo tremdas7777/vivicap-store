@@ -7,6 +7,8 @@ export type GalleryItem = {
   caption: string;
   /** Arte quadrada que ocupa o quadro inteiro (sem margem branca). */
   full?: boolean;
+  /** Vídeo curto, sem som e em loop; `src` é a capa (poster). */
+  video?: { webm: string; mp4: string };
 };
 
 export const productImages = {
@@ -21,13 +23,20 @@ export const productImages = {
 export const kitImage = (units: number) =>
   `${base}/vivicap-kit-${Math.min(3, Math.max(1, units))}.webp`;
 
-/** Galeria da página do produto, na ordem de venda: benefício → prova → compatibilidade → uso → produto e embalagem. */
+/** Galeria da página do produto, na ordem de venda: benefício → vídeo → prova → compatibilidade → uso → produto e embalagem. */
 export const productGallery: GalleryItem[] = [
   {
     src: productImages.temperatures,
     alt: "VIVI Cap funciona mesmo em temperaturas extremas: calor intenso e frio congelante",
     caption: "Calor e frio extremos",
     full: true,
+  },
+  {
+    src: "/videos/vivicap-poster.webp",
+    alt: "Vídeo do VIVI Cap: protege 24 horas, cabe no bolso, na bolsa, na mochila e no carro",
+    caption: "Vídeo",
+    full: true,
+    video: { webm: "/videos/vivicap.webm", mp4: "/videos/vivicap.mp4" },
   },
   {
     src: productImages.sensor,
