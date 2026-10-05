@@ -5,10 +5,12 @@ import { BundleSelector } from "@/components/site/BundleSelector";
 import { SiteLayout } from "@/components/site/Layout";
 import {
   BenefitsSection,
+  ComparisonSection,
   CtaFinal,
   FaqSection,
   HowItWorks,
   InTheBoxSection,
+  TechSection,
 } from "@/components/site/sections";
 import { trackCheckoutClick } from "@/lib/analytics";
 import {
@@ -47,8 +49,12 @@ const DETAILS = [
     body: (
       <p>
         O VIVI Cap é um protetor térmico em formato de tampa. Ele substitui a tampa original da sua
-        caneta aplicadora de insulina ou GLP-1, e a caneta fica dentro de um tubo transparente.
-        Assim o medicamento fica protegido do calor por até 24h, sem gelo, pilha ou geladeira.
+        caneta de insulina e protege o medicamento do calor e do frio extremo, 24 horas por dia. Por
+        dentro, um isolamento térmico especial trabalha junto com um material que absorve o excesso
+        de calor e se regenera sozinho, além de uma eletrônica de controle. Resultado: nada de pilha
+        para trocar, recarga, gelo ou geladeira — e um protetor que dura anos. Ao apertar o botão, a
+        luz verde confirma que a insulina ficou na temperatura certa. Pesa só 60 g, bloqueia a luz
+        direta e ainda protege a caneta em quedas.
       </p>
     ),
   },
@@ -65,11 +71,39 @@ const DETAILS = [
     ),
   },
   {
+    title: "Especificações",
+    body: (
+      <ul className="space-y-1.5">
+        {[
+          "Proteção contra calor e frio extremo, 24 horas por dia",
+          "Sem pilha para trocar, recarga, gelo ou água",
+          "Luz verde de confirmação ao apertar o botão",
+          "Bloqueia a luz direta e protege em quedas",
+          "Peso: 60 g",
+        ].map((t) => (
+          <li key={t} className="flex gap-2">
+            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[var(--violet)]" /> {t}
+          </li>
+        ))}
+      </ul>
+    ),
+  },
+  {
     title: "Compatibilidade",
     body: (
       <p>
-        Modelo multi-caneta, com versão para FlexPen. Se tiver dúvida sobre a sua caneta, fale com a
-        gente antes de comprar.
+        Serve nas canetas de insulina e pode ser trocado entre canetas diferentes. Se tiver dúvida
+        sobre o seu modelo, fale com a gente antes de comprar.
+      </p>
+    ),
+  },
+  {
+    title: "Testes e registros",
+    body: (
+      <p>
+        Segundo o fabricante (TempraMed), o desempenho do VIVI Cap foi testado e publicado na
+        revista científica Expert Opinion on Drug Delivery (2017), e o produto é registrado na FDA
+        (Estados Unidos) e tem marcação CE (Europa).
       </p>
     ),
   },
@@ -77,8 +111,9 @@ const DETAILS = [
     title: "Cuidados",
     body: (
       <p>
-        O VIVI Cap é para o dia a dia fora de casa e não substitui a geladeira. Siga sempre as
-        orientações de armazenamento do fabricante do seu medicamento.
+        Siga sempre as orientações de armazenamento do fabricante do seu medicamento. Antes de
+        começar a usar, guarde a insulina fechada na geladeira como de costume; o VIVI Cap é para a
+        caneta em uso.
       </p>
     ),
   },
@@ -99,7 +134,11 @@ function Page() {
 
   const onSelect = (id: BundleId) => {
     setSelected(id);
-    navigate({ search: (prev) => ({ ...prev, plano: Number(id) }), replace: true, resetScroll: false });
+    navigate({
+      search: (prev) => ({ ...prev, plano: Number(id) }),
+      replace: true,
+      resetScroll: false,
+    });
   };
 
   return (
@@ -162,8 +201,8 @@ function Page() {
                 VIVI Cap
               </h1>
               <p className="mt-4 text-[15.5px] leading-relaxed text-[var(--ink)]/70">
-                Substitui a tampa da sua caneta de insulina ou GLP-1 e mantém o medicamento em
-                temperatura segura por até 24h. Sem gelo, pilha ou geladeira.
+                Substitui a tampa da sua caneta e mantém a insulina na temperatura certa 24 horas
+                por dia, no calor ou no frio. Sem gelo, sem recarga e sem geladeira.
               </p>
 
               <ul className="mt-6 grid grid-cols-2 gap-2.5">
@@ -252,7 +291,9 @@ function Page() {
       </section>
 
       <HowItWorks />
+      <TechSection />
       <BenefitsSection />
+      <ComparisonSection />
       <InTheBoxSection />
       <FaqSection />
       <CtaFinal />

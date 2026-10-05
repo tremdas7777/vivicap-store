@@ -26,8 +26,8 @@ function Page() {
       <h2>O que fazemos</h2>
       <p>
         O VIVI Cap é um protetor térmico que substitui a tampa da caneta aplicadora. Ele protege o
-        medicamento do calor no dia a dia, sem gelo, pilha ou geladeira, e cabe no bolso ou na
-        bolsa.
+        medicamento do calor e do frio 24 horas por dia, sem gelo, recarga ou geladeira, e cabe no
+        bolso ou na bolsa.
       </p>
       <h2>No que acreditamos</h2>
       <ul>

@@ -1,5 +1,14 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Check, ChevronDown, Lock, ShieldCheck, Truck } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  ChevronDown,
+  Lock,
+  Minus,
+  ShieldCheck,
+  TriangleAlert,
+  Truck,
+} from "lucide-react";
 import { useState } from "react";
 import {
   availableBundles,
@@ -8,7 +17,7 @@ import {
   FREE_SHIPPING_MIN,
   type Bundle,
 } from "@/lib/bundles";
-import { BENEFITS, FAQ, IN_THE_BOX, STEPS, USE_CASES } from "@/lib/content";
+import { BENEFITS, COMPARISON, FAQ, IN_THE_BOX, STEPS, TECH, USE_CASES } from "@/lib/content";
 import { productImages } from "@/lib/product-images";
 import { cn } from "@/lib/utils";
 import { ContentIcon } from "./icons";
@@ -98,14 +107,14 @@ export function Hero() {
             canetas de insulina e GLP-1
           </span>
           <h1 className="mt-6 text-[2.5rem] leading-[1.03] text-balance md:text-[4rem]">
-            Sua caneta protegida do calor,{" "}
+            Sua insulina na temperatura certa,{" "}
             <span className="bg-gradient-to-r from-[var(--lavender)] to-[var(--ice-strong)] bg-clip-text text-transparent">
-              onde você estiver.
+              24 horas por dia.
             </span>
           </h1>
           <p className="mt-6 max-w-lg text-base leading-relaxed text-white/75 md:text-lg">
-            O VIVI Cap substitui a tampa da caneta e mantém seu medicamento em temperatura segura
-            por até 24h — sem gelo, pilha ou geladeira.
+            O VIVI Cap substitui a tampa da caneta e protege a insulina do calor e do frio extremo,
+            onde você estiver. Sem gelo, sem recarga, sem geladeira — e funciona por anos.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <BuyButton />
@@ -118,8 +127,8 @@ export function Hero() {
           </div>
           <ul className="mt-10 grid max-w-lg grid-cols-1 gap-3 text-[13.5px] text-white/80 sm:grid-cols-3">
             {[
-              "Até 24h protegida",
-              "Liberado para avião",
+              "Proteção 24 horas por dia",
+              "Serve em qualquer caneta",
               `Frete grátis acima de R$ ${FREE_SHIPPING_MIN}`,
             ].map((t) => (
               <li key={t} className="flex items-center gap-2">
@@ -146,8 +155,8 @@ export function Hero() {
               <ContentIcon name="thermometer" className="h-5 w-5 text-[#2a8fc4]" />
             </span>
             <span className="text-[13px] leading-tight">
-              <b className="block text-[15px]">Até 24h</b>
-              em temperatura segura
+              <b className="block text-[15px]">24 horas por dia</b>
+              insulina na temperatura certa
             </span>
           </div>
         </div>
@@ -194,24 +203,29 @@ export function ProblemSection() {
             <div className="flex items-end justify-between">
               <div>
                 <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-[#b4542a]">
-                  Dentro do carro ao sol
+                  Limite da insulina em uso
                 </p>
                 <p className="mt-2 font-display text-6xl font-extrabold text-[#8d2f12] md:text-7xl">
-                  +50°C
+                  30°C
                 </p>
               </div>
               <ContentIcon name="sun" className="h-16 w-16 text-[#f08a4b]" />
             </div>
             <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-[#6b2a12]/80">
-              Em dias de verão, o interior de um carro fechado pode passar de 50 °C em poucos
-              minutos. Uma bolsa ao sol também esquenta rápido.
+              Acima de 30 °C ou abaixo de zero, a insulina pode estragar. No verão brasileiro, um
+              carro fechado, a bolsa ao sol ou o armário da academia passam disso fácil.
             </p>
           </div>
           <div className="relative -mt-10 ml-auto w-[78%] rounded-[2rem] bg-[var(--ice)] p-6 shadow-[0_30px_60px_-30px_rgba(27,34,102,0.45)]">
             <div className="flex items-center gap-4">
-              <img src={productImages.pen} alt="" className="h-24 w-16 object-contain mix-blend-multiply" />
+              <img
+                src={productImages.pen}
+                alt=""
+                className="h-24 w-16 object-contain mix-blend-multiply"
+              />
               <p className="text-[15px] leading-relaxed text-[var(--navy)]">
-                <b>Com o VIVI Cap</b>, sua caneta fica protegida mesmo quando você não está em casa.
+                <b>Com o VIVI Cap</b>, a insulina fica na temperatura certa 24 horas por dia, mesmo
+                longe de casa.
               </p>
             </div>
           </div>
@@ -219,18 +233,18 @@ export function ProblemSection() {
         <div className="order-1 md:order-2">
           <SectionHeading
             eyebrow="Por que proteger"
-            title="O calor é inimigo silencioso da sua caneta"
-            sub="Insulina e medicamentos GLP-1 são sensíveis à temperatura. Os fabricantes recomendam evitar o calor e a luz do sol direta, e o problema é que o medicamento pode perder eficácia sem mudar de aparência."
+            title="Insulina estragada não muda de cor"
+            sub="Insulina é sensível ao calor, ao frio e à luz. Quando passa do ponto, ela perde efeito sem nenhum sinal visível — e você só descobre pela glicemia."
           />
           <ul className="mt-8 space-y-4">
             {[
-              "Você não vê a diferença, mas o resultado pode aparecer depois.",
-              "Bolsa térmica com gelo é pesada, molha e dura pouco.",
-              "O VIVI Cap protege sua dose no dia a dia, sem complicação.",
+              "Glicemia oscilando sem explicação.",
+              "Necessidade de doses maiores para o mesmo efeito.",
+              "Mais risco de hipoglicemia.",
             ].map((t) => (
               <li key={t} className="flex gap-3 text-[15px] text-[var(--ink)]/75">
-                <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[var(--lilac)]">
-                  <Check className="h-3.5 w-3.5 text-[var(--violet)]" />
+                <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-amber-100">
+                  <TriangleAlert className="h-3.5 w-3.5 text-amber-700" />
                 </span>
                 {t}
               </li>
@@ -274,6 +288,108 @@ export function HowItWorks() {
   );
 }
 
+export function TechSection() {
+  return (
+    <section className="bg-white py-20 md:py-28">
+      <div className="container-edge grid items-center gap-12 lg:grid-cols-2">
+        <div>
+          <SectionHeading
+            eyebrow="A tecnologia"
+            title="Por dentro do VIVI Cap"
+            sub="Nada de pilha para trocar, recarga ou gelo. O protetor regula a temperatura sozinho, 24 horas por dia, e funciona por anos."
+          />
+          <ol className="mt-10 space-y-4">
+            {TECH.map((t, i) => (
+              <li
+                key={t.title}
+                className="flex gap-4 rounded-[1.5rem] border border-[var(--border)] p-5"
+              >
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[var(--navy)] font-display text-base font-extrabold text-white">
+                  {i + 1}
+                </span>
+                <span>
+                  <b className="block text-[16px] text-[var(--navy)]">{t.title}</b>
+                  <span className="mt-1 block text-[14.5px] leading-relaxed text-[var(--ink)]/65">
+                    {t.text}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div className="relative">
+          <div className="rounded-[2rem] bg-gradient-to-br from-[var(--ice)] to-[var(--lilac)] p-10">
+            <img
+              src={productImages.pen}
+              alt="VIVI Cap encaixado na caneta"
+              loading="lazy"
+              className="mx-auto max-h-[440px] w-auto object-contain mix-blend-multiply"
+            />
+          </div>
+          <div className="absolute -bottom-5 right-5 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl">
+            <span className="h-3 w-3 rounded-full bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,0.25)]" />
+            <span className="text-[13px] leading-tight text-[var(--navy)]">
+              <b className="block text-[14px]">Luz verde</b>
+              insulina na temperatura certa
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ComparisonSection() {
+  return (
+    <section className="bg-[var(--paper)] py-20 md:py-28">
+      <div className="container-edge">
+        <SectionHeading eyebrow="Compare" title="Por que não uma bolsa térmica?" center />
+        <div className="mx-auto mt-12 max-w-4xl overflow-x-auto rounded-[1.75rem] border border-[var(--border)] bg-white">
+          <table className="w-full min-w-[560px] text-left text-[14px]">
+            <thead>
+              <tr>
+                <th className="p-5" />
+                {COMPARISON.columns.map((c, i) => (
+                  <th
+                    key={c}
+                    className={cn(
+                      "p-5 text-center font-display text-[15px]",
+                      i === 0 ? "bg-[var(--navy)] text-white" : "text-[var(--ink)]/60",
+                    )}
+                  >
+                    {c}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {COMPARISON.rows.map((r) => (
+                <tr key={r.label} className="border-t border-[var(--border)]">
+                  <td className="p-5 font-medium text-[var(--navy)]">{r.label}</td>
+                  {r.values.map((v, i) => (
+                    <td key={i} className={cn("p-5 text-center", i === 0 && "bg-[var(--lilac)]")}>
+                      {v ? (
+                        <Check
+                          className={cn(
+                            "mx-auto h-5 w-5",
+                            i === 0 ? "text-[var(--violet)]" : "text-[var(--ink)]/45",
+                          )}
+                        />
+                      ) : (
+                        <Minus className="mx-auto h-5 w-5 text-[var(--ink)]/25" />
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function BenefitsSection() {
   return (
     <section className="relative overflow-hidden bg-[var(--navy)] py-20 text-white md:py-28">
@@ -282,7 +398,7 @@ export function BenefitsSection() {
         <div>
           <SectionHeading
             eyebrow="Benefícios"
-            title="Tudo o que você precisa para levar seu tratamento com você"
+            title="Liberdade para levar sua insulina a qualquer lugar"
             light
           />
           <div className="mt-10 rounded-[2rem] bg-white p-6">
@@ -361,7 +477,12 @@ export function KitCard({ bundle }: { bundle: Bundle }) {
         </span>
       )}
       <div className="relative flex h-40 items-center justify-center">
-        <img src={productImages.box} alt="" loading="lazy" className="h-full w-auto object-contain" />
+        <img
+          src={productImages.box}
+          alt=""
+          loading="lazy"
+          className="h-full w-auto object-contain"
+        />
         {bundle.units > 1 && (
           <span className="absolute right-2 top-0 grid h-12 w-12 place-items-center rounded-full bg-[var(--navy)] font-display text-lg font-extrabold text-white shadow-lg">
             {bundle.units}×
@@ -538,7 +659,12 @@ export function CtaFinal() {
               </BuyButton>
             </div>
             <div className="mx-auto hidden w-full max-w-sm rounded-[2rem] bg-white p-6 shadow-[0_30px_60px_-25px_rgba(0,0,0,0.6)] md:block">
-              <img src={productImages.box} alt="" loading="lazy" className="w-full object-contain" />
+              <img
+                src={productImages.box}
+                alt=""
+                loading="lazy"
+                className="w-full object-contain"
+              />
             </div>
           </div>
         </div>

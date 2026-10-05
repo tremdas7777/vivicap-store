@@ -1,5 +1,10 @@
 import {
   Briefcase,
+  Dumbbell,
+  Feather,
+  Infinity as InfinityIcon,
+  ShieldCheck,
+  SunDim,
   Car,
   Lightbulb,
   PenLine,
@@ -21,6 +26,11 @@ const ICONS: Record<string, LucideIcon> = {
   sun: Sun,
   briefcase: Briefcase,
   car: Car,
+  infinity: InfinityIcon,
+  sunoff: SunDim,
+  shield: ShieldCheck,
+  feather: Feather,
+  dumbbell: Dumbbell,
 };
 
 /** Ícone por nome (usado pelos textos em lib/content.ts). */
