@@ -18,7 +18,7 @@ import {
   type Bundle,
 } from "@/lib/bundles";
 import { BENEFITS, COMPARISON, FAQ, IN_THE_BOX, STEPS, TECH, USE_CASES } from "@/lib/content";
-import { productImages } from "@/lib/product-images";
+import { kitImage, productImages } from "@/lib/product-images";
 import { cn } from "@/lib/utils";
 import { ContentIcon } from "./icons";
 
@@ -140,13 +140,13 @@ export function Hero() {
 
         <div className="relative mx-auto w-full max-w-[520px]">
           <div className="absolute inset-[8%] rounded-full bg-gradient-to-br from-[var(--lavender)]/40 to-[var(--ice-strong)]/25 blur-2xl" />
-          <div className="relative aspect-square rounded-[2.5rem] bg-white p-6 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.55)] md:p-10">
+          <div className="relative aspect-square overflow-hidden rounded-[2.5rem] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.55)]">
             <img
-              src={productImages.box}
-              alt="VIVI Cap com a caneta dentro do tubo transparente, ao lado da embalagem"
-              className="h-full w-full object-contain"
-              width={880}
-              height={640}
+              src={productImages.travel}
+              alt="VIVI Cap pronto para viajar: sem água ou gelo, sem geladeira e sem recarga"
+              className="h-full w-full object-cover"
+              width={1260}
+              height={1260}
               fetchPriority="high"
             />
           </div>
@@ -218,11 +218,6 @@ export function ProblemSection() {
           </div>
           <div className="relative -mt-10 ml-auto w-[78%] rounded-[2rem] bg-[var(--ice)] p-6 shadow-[0_30px_60px_-30px_rgba(27,34,102,0.45)]">
             <div className="flex items-center gap-4">
-              <img
-                src={productImages.pen}
-                alt=""
-                className="h-24 w-16 object-contain mix-blend-multiply"
-              />
               <p className="text-[15px] leading-relaxed text-[var(--navy)]">
                 <b>Com o VIVI Cap</b>, a insulina fica na temperatura certa 24 horas por dia, mesmo
                 longe de casa.
@@ -465,18 +460,13 @@ export function KitCard({ bundle }: { bundle: Bundle }) {
           {bundle.badge}
         </span>
       )}
-      <div className="relative flex h-40 items-center justify-center">
+      <div className="flex h-44 items-end justify-center rounded-2xl bg-gradient-to-b from-[var(--lilac)] to-white pt-4">
         <img
-          src={productImages.box}
-          alt=""
+          src={kitImage(bundle.units)}
+          alt={`${bundle.units} VIVI Cap`}
           loading="lazy"
-          className="h-full w-auto object-contain"
+          className="h-36 w-auto object-contain"
         />
-        {bundle.units > 1 && (
-          <span className="absolute right-2 top-0 grid h-12 w-12 place-items-center rounded-full bg-[var(--navy)] font-display text-lg font-extrabold text-white shadow-lg">
-            {bundle.units}×
-          </span>
-        )}
       </div>
       <h3 className="mt-5 text-xl text-[var(--navy)]">{bundle.name}</h3>
       <p className="mt-1 text-[13.5px] text-[var(--ink)]/60">{bundle.perUnitLabel}</p>
@@ -541,14 +531,12 @@ export function InTheBoxSection() {
   return (
     <section className="bg-white py-20 md:py-28">
       <div className="container-edge grid items-center gap-12 md:grid-cols-2">
-        <div className="rounded-[2rem] bg-[var(--lilac)] p-8">
-          <img
-            src={productImages.kitOpen}
-            alt="Conteúdo da caixa do VIVI Cap"
-            loading="lazy"
-            className="mx-auto max-h-[420px] w-auto object-contain mix-blend-multiply"
-          />
-        </div>
+        <img
+          src={productImages.pens}
+          alt="VIVI Cap serve em todas as canetas de insulina e cabe no bolso"
+          loading="lazy"
+          className="w-full rounded-[2rem] shadow-[0_30px_70px_-40px_rgba(27,34,102,0.55)]"
+        />
         <div>
           <SectionHeading eyebrow="Na caixa" title="O que você recebe" />
           <ul className="mt-8 space-y-3">
@@ -647,14 +635,12 @@ export function CtaFinal() {
                 Escolher meu kit
               </BuyButton>
             </div>
-            <div className="mx-auto hidden w-full max-w-sm rounded-[2rem] bg-white p-6 shadow-[0_30px_60px_-25px_rgba(0,0,0,0.6)] md:block">
-              <img
-                src={productImages.box}
-                alt=""
-                loading="lazy"
-                className="w-full object-contain"
-              />
-            </div>
+            <img
+              src={productImages.travel}
+              alt=""
+              loading="lazy"
+              className="mx-auto hidden w-full max-w-sm rounded-[2rem] shadow-[0_30px_60px_-25px_rgba(0,0,0,0.6)] md:block"
+            />
           </div>
         </div>
       </div>

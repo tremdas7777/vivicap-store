@@ -173,7 +173,7 @@ function Page() {
                   </span>
                 )}
               </div>
-              <div className="mt-3 grid grid-cols-6 gap-2 md:gap-3">
+              <div className="mt-3 grid grid-cols-5 gap-2 md:gap-3">
                 {productGallery.map((g, i) => (
                   <button
                     key={g.src}

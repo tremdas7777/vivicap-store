@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { bundleUnitsLabel, type Bundle } from "@/lib/bundles";
-import { brl, PRODUCT_IMG } from "./parts";
+import { kitImage } from "@/lib/product-images";
+import { brl } from "./parts";
 import { FreeShippingProgress } from "./FreeShippingProgress";
 
 type Props = { bundle: Bundle; frete: number; discount: number };
@@ -37,11 +38,11 @@ function Body(p: Props) {
       </div>
       <div className="mt-6 flex gap-3 border-t border-border pt-6">
         <img
-          src={PRODUCT_IMG}
+          src={kitImage(bundle.units)}
           alt=""
           width={56}
           height={56}
-          className="h-14 w-14 rounded-md border border-border bg-white object-contain p-1"
+          className="h-14 w-14 rounded-md border border-border bg-white object-contain p-0.5"
         />
         <div className="flex-1 text-[13px]">
           <p>VIVI Cap — Protetor térmico para canetas</p>

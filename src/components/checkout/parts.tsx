@@ -16,7 +16,6 @@ export function PixIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-export const PRODUCT_IMG = "/images/produto/vivicap-caneta.webp";
 
 export function Card({
   children,

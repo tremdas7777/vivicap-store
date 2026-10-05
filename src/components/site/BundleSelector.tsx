@@ -1,4 +1,5 @@
 import { availableBundles, brl, isFreeShippingEligible, type BundleId } from "@/lib/bundles";
+import { kitImage } from "@/lib/product-images";
 import { cn } from "@/lib/utils";
 
 /** Escolha do kit (1, 2 ou 3 unidades) na página do produto. */
@@ -45,6 +46,12 @@ export function BundleSelector({
             >
               {active && <span className="h-2.5 w-2.5 rounded-full bg-[var(--violet)]" />}
             </span>
+            <img
+              src={kitImage(b.units)}
+              alt=""
+              className="h-14 w-12 shrink-0 object-contain"
+              loading="lazy"
+            />
             <span className="flex-1">
               <span className="block text-[15px] font-semibold text-[var(--navy)]">{b.name}</span>
               <span className="block text-[12.5px] text-[var(--ink)]/55">

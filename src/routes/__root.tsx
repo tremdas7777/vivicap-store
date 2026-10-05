@@ -110,9 +110,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "VIVI Cap: protetor térmico que substitui a tampa da caneta de insulina ou GLP-1 e protege o medicamento do calor no dia a dia, em viagens e no trabalho. Pagamento via Pix.",
       },
-      { property: "og:image", content: "/images/produto/vivicap-caixa.webp" },
+      { property: "og:image", content: "/images/produto/vivicap-viagem.webp" },
       { property: "og:image:alt", content: "VIVI Cap — protetor térmico para canetas" },
-      { name: "twitter:image", content: "/images/produto/vivicap-caixa.webp" },
+      { name: "twitter:image", content: "/images/produto/vivicap-viagem.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

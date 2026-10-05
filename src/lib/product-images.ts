@@ -1,4 +1,4 @@
-/** Fotos do VIVI Cap (public/images/produto). Fundo transparente/branco. */
+/** Artes do VIVI Cap em português (public/images/produto). */
 const base = "/images/produto";
 
 export type GalleryItem = {
@@ -10,23 +10,19 @@ export type GalleryItem = {
 };
 
 export const productImages = {
-  box: `${base}/vivicap-caixa.webp`,
-  pen: `${base}/vivicap-caneta.webp`,
-  kitOpen: `${base}/vivicap-kit-aberto.webp`,
-  flexpen: `${base}/vivicap-flexpen.webp`,
   temperatures: `${base}/vivicap-temperaturas.webp`,
   sensor: `${base}/vivicap-sensor.webp`,
   pens: `${base}/vivicap-canetas.webp`,
   travel: `${base}/vivicap-viagem.webp`,
+  box: `${base}/vivicap-caixa-pt.webp`,
 } as const;
 
-/** Galeria da página do produto, na ordem de venda: produto → benefício → prova → compatibilidade → uso → caixa. */
+/** Foto do kit (1, 2 ou 3 unidades, fundo transparente). Arquivos pequenos: usar em tamanho moderado. */
+export const kitImage = (units: number) =>
+  `${base}/vivicap-kit-${Math.min(3, Math.max(1, units))}.webp`;
+
+/** Galeria da página do produto, na ordem de venda: benefício → prova → compatibilidade → uso → produto e embalagem. */
 export const productGallery: GalleryItem[] = [
-  {
-    src: productImages.box,
-    alt: "VIVI Cap com a caneta dentro do tubo transparente, ao lado da embalagem",
-    caption: "VIVI Cap + embalagem",
-  },
   {
     src: productImages.temperatures,
     alt: "VIVI Cap funciona mesmo em temperaturas extremas: calor intenso e frio congelante",
@@ -52,10 +48,10 @@ export const productGallery: GalleryItem[] = [
     full: true,
   },
   {
-    src: productImages.kitOpen,
-    alt: "Caixa do VIVI Cap aberta com o protetor, o tubo transparente e a tampa",
-    caption: "O que vem na caixa",
+    src: productImages.box,
+    alt: "VIVI Cap encaixado na caneta, ao lado da embalagem: Protetor Térmico de Insulina",
+    caption: "Produto e embalagem",
   },
 ];
 
-export const productHeroImage = productImages.box;
+export const productHeroImage = productImages.temperatures;

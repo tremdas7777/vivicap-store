@@ -8,7 +8,8 @@ import { brand } from "@/lib/brand";
 import { createUpsellCharge } from "@/lib/pix.functions";
 import { loadPixSession, savePixSession, type PixSession } from "@/lib/pix-session";
 import { UPSELL_DISCOUNT, upsellPrice } from "@/lib/upsell";
-import { brl, PRODUCT_IMG } from "@/components/checkout/parts";
+import { brl } from "@/components/checkout/parts";
+import { kitImage } from "@/lib/product-images";
 import { Shell } from "@/components/checkout/OrderShell";
 
 export const Route = createFileRoute("/upsell/$id")({
@@ -103,7 +104,7 @@ function Page() {
         <div className="mt-6 rounded-xl border-2 border-[var(--ck-ok)] p-5">
           <div className="flex items-center gap-4">
             <img
-              src={PRODUCT_IMG}
+              src={kitImage(bundle.units)}
               alt={brand.productName}
               width={96}
               height={96}
