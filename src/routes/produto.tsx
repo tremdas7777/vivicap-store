@@ -161,14 +161,19 @@ function Page() {
                   key={active.src}
                   src={active.src}
                   alt={active.alt}
-                  className="fade-up h-full w-full object-contain p-6 md:p-12"
-                  fetchPriority="high"
+                  className={cn(
+                    "fade-up h-full w-full",
+                    active.full ? "object-cover" : "object-contain p-6 md:p-12",
+                  )}
+                  fetchPriority={activeImg === 0 ? "high" : "auto"}
                 />
-                <span className="absolute bottom-4 left-4 rounded-full bg-[var(--navy)]/90 px-3 py-1.5 text-[12px] font-medium text-white">
-                  {active.caption}
-                </span>
+                {!active.full && (
+                  <span className="absolute bottom-4 left-4 rounded-full bg-[var(--navy)]/90 px-3 py-1.5 text-[12px] font-medium text-white">
+                    {active.caption}
+                  </span>
+                )}
               </div>
-              <div className="mt-4 grid grid-cols-4 gap-3">
+              <div className="mt-3 grid grid-cols-6 gap-2 md:gap-3">
                 {productGallery.map((g, i) => (
                   <button
                     key={g.src}
@@ -177,7 +182,8 @@ function Page() {
                     aria-label={`Ver foto: ${g.caption}`}
                     aria-current={i === activeImg}
                     className={cn(
-                      "aspect-square overflow-hidden rounded-2xl border-2 bg-white p-2 transition",
+                      "aspect-square overflow-hidden rounded-xl border-2 bg-white transition md:rounded-2xl",
+                      !g.full && "p-1.5",
                       i === activeImg
                         ? "border-[var(--violet)]"
                         : "border-transparent hover:border-[var(--lavender)]",
@@ -186,7 +192,7 @@ function Page() {
                     <img
                       src={g.src}
                       alt=""
-                      className="h-full w-full object-contain"
+                      className={cn("h-full w-full", g.full ? "object-cover" : "object-contain")}
                       loading="lazy"
                     />
                   </button>

@@ -318,21 +318,12 @@ export function TechSection() {
           </ol>
         </div>
         <div className="relative">
-          <div className="rounded-[2rem] bg-gradient-to-br from-[var(--ice)] to-[var(--lilac)] p-10">
-            <img
-              src={productImages.pen}
-              alt="VIVI Cap encaixado na caneta"
-              loading="lazy"
-              className="mx-auto max-h-[440px] w-auto object-contain mix-blend-multiply"
-            />
-          </div>
-          <div className="absolute -bottom-5 right-5 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl">
-            <span className="h-3 w-3 rounded-full bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,0.25)]" />
-            <span className="text-[13px] leading-tight text-[var(--navy)]">
-              <b className="block text-[14px]">Luz verde</b>
-              insulina na temperatura certa
-            </span>
-          </div>
+          <img
+            src={productImages.sensor}
+            alt="Sensor de temperatura integrado: a luz verde mostra que a insulina está segura"
+            loading="lazy"
+            className="w-full rounded-[2rem] shadow-[0_30px_70px_-40px_rgba(27,34,102,0.55)]"
+          />
         </div>
       </div>
     </section>
@@ -401,14 +392,12 @@ export function BenefitsSection() {
             title="Liberdade para levar sua insulina a qualquer lugar"
             light
           />
-          <div className="mt-10 rounded-[2rem] bg-white p-6">
-            <img
-              src={productImages.kitOpen}
-              alt="Caixa do VIVI Cap aberta com o protetor, o tubo transparente e a tampa"
-              className="mx-auto max-h-[380px] w-auto object-contain"
-              loading="lazy"
-            />
-          </div>
+          <img
+            src={productImages.temperatures}
+            alt="VIVI Cap funciona mesmo em temperaturas extremas: calor intenso e frio congelante"
+            className="mt-10 w-full max-w-md rounded-[2rem]"
+            loading="lazy"
+          />
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {BENEFITS.map((b) => (
