@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { getAdminFunnel, verifyAdminPassword } from "@/lib/admin.functions";
 import { getSiteSettings, setWhatsappEnabled } from "@/lib/site-settings.functions";
+import { PixGateCard } from "@/components/admin/PixGateCard";
 import { UtmifyCard } from "@/components/admin/UtmifyCard";
 import { MetaPixelCard } from "@/components/admin/MetaPixelCard";
 import { OrdersTab } from "@/components/admin/OrdersTab";
@@ -283,6 +284,7 @@ function AdminPage() {
                   </Button>
                 </div>
               </Card>
+              <PixGateCard password={password} />
               <UtmifyCard password={password} />
               <MetaPixelCard password={password} />
             </section>

@@ -6,7 +6,7 @@ import { sendRastroOrder, type RastroAddress } from "@/lib/rastrocode.server";
 import { getBundle } from "@/lib/bundles";
 import { isPaidStatus } from "@/lib/pix-status";
 
-const API = "https://app.pixgateip.com/api";
+import { PIXGATE_API, requirePixGateKey } from "@/lib/pixgate.server";
 
 export type StoredCustomer = {
   name: string;
@@ -144,9 +144,8 @@ export { isPaidStatus };
 
 /** Consulta o status real no gateway. */
 export async function fetchGatewayStatus(id: string): Promise<{ status: string; amount: number }> {
-  const key = process.env["PIXGATE_API_KEY"];
-  if (!key) throw new Error("Pagamento indisponível no momento.");
-  const res = await fetch(`${API}/stats/${encodeURIComponent(id)}`, {
+  const key = await requirePixGateKey();
+  const res = await fetch(`${PIXGATE_API}/stats/${encodeURIComponent(id)}`, {
     headers: { Apikey: key, Accept: "application/json" },
   });
   const json = (await res.json().catch(() => null)) as any;

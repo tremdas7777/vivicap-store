@@ -13,15 +13,24 @@ import {
 import { isPaidStatus } from "@/lib/pix-status";
 import { upsellPrice } from "@/lib/upsell";
 import { getRequest } from "@tanstack/react-start/server";
+import { PIXGATE_API, requirePixGateKey } from "@/lib/pixgate.server";
 
 const utmSchema = z.record(z.string(), z.string().max(300).nullable()).optional().default({});
 
-const API = "https://app.pixgateip.com/api";
-
-function apiKey(): string {
-  const key = process.env["PIXGATE_API_KEY"];
-  if (!key) throw new Error("Pagamento indisponível no momento.");
-  return key;
+/**
+ * Domínio público para o postback da PixGate, lido da própria requisição no servidor
+ * (não do que o navegador informa). Fora de https público (ex.: localhost), usa PUBLIC_SITE_URL.
+ */
+function siteBase(fallbackOrigin: string): string {
+  const h = getRequest()?.headers;
+  const host = h?.get("x-forwarded-host") ?? h?.get("host");
+  const proto = h?.get("x-forwarded-proto") ?? "https";
+  const fromRequest = host ? `${proto}://${host}` : "";
+  const isPublic = /^https:\/\//.test(fromRequest) && !/localhost|127\.0\.0\.1/.test(fromRequest);
+  const base = isPublic
+    ? fromRequest
+    : process.env["PUBLIC_SITE_URL"] || fromRequest || fallbackOrigin;
+  return new URL(base).origin;
 }
 
 function isValidCpf(raw: string): boolean {
@@ -81,16 +90,20 @@ export type PixCharge = { id: string; qrcode: string; amount: number; status: st
 async function gatewayCashin(o: { name: string; cpf: string; amount: number; origin: string }) {
   // PixGate recebe o valor em reais (decimal); internamente seguimos em centavos.
   const valor = Number((o.amount / 100).toFixed(2));
-  const res = await fetch(`${API}/v1/cashin`, {
+  const res = await fetch(`${PIXGATE_API}/v1/cashin`, {
     method: "POST",
-    headers: { Apikey: apiKey(), "Content-Type": "application/json", Accept: "application/json" },
+    headers: {
+      Apikey: await requirePixGateKey(),
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
     body: JSON.stringify({
       nome: o.name,
       cpf: o.cpf,
       valor,
       // Nome genérico enviado ao gateway — sem detalhes do produto real.
       descricao: brand.chargeDescription,
-      postback: `${new URL(o.origin).origin}/api/public/pix-webhook`,
+      postback: `${siteBase(o.origin)}/api/public/pix-webhook`,
     }),
   });
   const json = (await res.json().catch(() => null)) as any;
