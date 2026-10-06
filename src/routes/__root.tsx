@@ -125,6 +125,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "apple-touch-icon", href: "/favicon.svg" },
     ],
+    scripts: [
+      {
+        type: "text/javascript",
+        // Pixel da UTMify (nunca carrega duplicado).
+        children: `(function(){if(document.querySelector('script[src*="cdn.utmify.com.br/scripts/pixel/pixel.js"]'))return;window.pixelId="6ac469ea6eb9da4c361e4f3f";var s=document.createElement("script");s.src="https://cdn.utmify.com.br/scripts/pixel/pixel.js";s.async=true;s.defer=true;(document.head||document.documentElement).appendChild(s);})();`,
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
