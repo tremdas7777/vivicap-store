@@ -32,7 +32,7 @@ export type Bundle = {
 const brlInline = (n: number) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 /** Preço de 1 unidade: referência do "de" dos kits (quantidade × preço unitário). */
-const UNIT_PRICE = 150;
+const UNIT_PRICE = 59.9;
 const kit = (
   units: number,
   price: number,
@@ -60,8 +60,8 @@ const kit = (
 
 export const bundles: Bundle[] = [
   kit(1, UNIT_PRICE),
-  kit(2, 200, { featured: true, badge: "Mais vendido" }),
-  kit(3, 230, { badge: "Melhor custo-benefício" }),
+  kit(2, 69.9, { featured: true, badge: "Mais vendido" }),
+  kit(3, 79.9, { badge: "Melhor custo-benefício" }),
 ];
 
 /** Kits visíveis na loja. */
